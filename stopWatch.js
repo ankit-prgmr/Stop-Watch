@@ -22,6 +22,24 @@ function setup(){
   recordButton.addEventListener("click", function(){
     recordTime();
   });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === 's'){
+      startStop();
+    }
+  });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === 'r'){
+      reset();
+    }
+  });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === 't'){
+      recordTime();
+    }
+  });
 }
 
 function startStop(){
@@ -48,6 +66,7 @@ function reset(){
   time = 0;
   min = 0;
   document.getElementById('time').innerHTML = time;
+  document.getElementById('pastTimes').innerHTML = "Past Times:";
 }
 
 function recordTime(){
@@ -61,4 +80,5 @@ function recordTime(){
 
   //==================Second Way================================
   min !== 0? (document.getElementById('pastTimes').innerHTML += "<br>" + min + ":" + time.toFixed(2)) : document.getElementById('pastTimes').innerHTML += "<br>" + time.toFixed(2);
+
 }
