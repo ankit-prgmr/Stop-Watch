@@ -2,6 +2,7 @@
 var started = false;
 var interval;
 var time = 0;
+var min = 0;
 
 setup();
 
@@ -28,7 +29,11 @@ function startStop(){
     started = true;
     interval = setInterval(function(){
       time = time + 0.01;
-      document.getElementById('time').innerHTML = time.toFixed(2);
+      if(time >= 60){
+        min++;
+        time = 0;
+      }
+      min !== 0? (document.getElementById('time').innerHTML = min + ":" + time.toFixed(2)) : document.getElementById('time').innerHTML = time.toFixed(2);
     },10);
  }
  else{
@@ -41,6 +46,7 @@ function reset(){
   started = false;
   clearInterval(interval);
   time = 0;
+  min = 0;
   document.getElementById('time').innerHTML = time;
 }
 
@@ -54,5 +60,5 @@ function recordTime(){
   // }
 
   //==================Second Way================================
-  document.getElementById("pastTimes").innerHTML += "<br>" + time.toFixed(2);
+  min !== 0? (document.getElementById('pastTimes').innerHTML += "<br>" + min + ":" + time.toFixed(2)) : document.getElementById('pastTimes').innerHTML += "<br>" + time.toFixed(2);
 }
